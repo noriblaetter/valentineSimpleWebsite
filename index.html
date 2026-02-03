@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Be My Valentine</title>
+    <link rel="stylesheet" href="valentine.css" />
+  </head>
+  <body>
+    <div id="valentineQuestion"><b>INSERT NAME, will you be my valentine?</b></div>
+    <button class="answerButton" onclick="location.href='thankyou.html'">
+      Yes
+    </button>
+    <button class="answerButton" id="noButton">not really...</button>
+    <br />
+    <img src="cat.gif" alt="cat asking question" class="responsive" />
+
+    <script>
+      var yesButton = document.querySelector(
+        'button[onclick*="thankyou.html"]'
+      );
+      var noButton = document.getElementById("noButton");
+      var clickCount = 0;
+
+        // Move noButton to random position and make yesButton bigger when noButton is clicked
+        noButton.addEventListener("click", function () {
+          clickCount++;
+          
+          // Switch to absolute positioning only on first click
+          if (clickCount === 1) {
+            noButton.style.position = "absolute";
+          }
+          
+          // Make yes button bigger
+          var currentFontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
+          yesButton.style.fontSize = (currentFontSize + 10) + "px";
+
+          // Move no button to random position within the viewport
+          var maxX = window.innerWidth - noButton.offsetWidth;
+          var maxY = window.innerHeight - noButton.offsetHeight;
+          var randomX = Math.floor(Math.random() * maxX);
+          var randomY = Math.floor(Math.random() * maxY);
+          noButton.style.left = randomX + "px";
+          noButton.style.top = randomY + "px";
+          
+          // Display click count
+          console.log("No button clicked " + clickCount + " times");
+        });
+    </script>
+  </body>
+</html>
